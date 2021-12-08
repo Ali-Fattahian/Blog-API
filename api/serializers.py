@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 from .models import Post, Comment, Tag
 
 
@@ -30,3 +31,8 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['id', 'title', 'excerpt', 'image', 'date', 'date_created', 'slug', 'content', 'author', 'tag',
                   'comments']
+
+
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name')
